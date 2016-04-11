@@ -1,7 +1,7 @@
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Component} from 'angular2/core';
-
+import 'rxjs/Rx';import 'rxjs/Rx';
 
 @Component({
     selector: 'my-simple-component-limitation-offset-is-there-one',
@@ -9,11 +9,9 @@ import {Component} from 'angular2/core';
 
 })
 
-
 export class SimpleComponentHttp 
 { 
-    //http://www.google.com/finance/info?q=NSE:AIAENG,ATULAUTO,<Add more NSE codes>
-
+   
     stock; 
 
     ngOnInit()
@@ -29,13 +27,14 @@ export class SimpleComponentHttp
 
 	getStock() {
 
-		this.http.get("http://www.google.com/finance/info?q=NSE:AIAENG,ATULAUTO,MSTF")
-			.subscribe(
-			data => { 
-				console.log(data._body);
-				console.log(data); 
-			},
-			err => console.log(err),
-			() => console.log('done!'));
-		};
+	this.http.get("http://jsonplaceholder.typicode.com/posts/1").map((res: Response) => res.json())	.subscribe(
+	data => {
+		console.log(data.id);
+		console.log(data.title);
+		console.log(data);
+	},
+		err => console.log(err),
+		() => console.log('done!'));
+	};
+
 }
