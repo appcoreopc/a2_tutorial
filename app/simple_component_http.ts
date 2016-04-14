@@ -1,23 +1,22 @@
 import {Http, Response} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
 import {Component} from 'angular2/core';
-import 'rxjs/Rx';import 'rxjs/Rx';
+import {Article} from 'app/article';
+import 'rxjs/Rx'; import 'rxjs/Rx';
 
 @Component({
     selector: 'my-simple-component-limitation-offset-is-there-one',
-    template : '<h1> Stock App </h1>'
-
+    template: '<h1> Stock App </h1> <div>testing for sure : {{ info?.title }}</div>'
 })
+
 
 export class SimpleComponentHttp 
 { 
    
-    stock; 
+    info: Article;
 
     ngOnInit()
     {
 		this.getStock();
-		///console.log('init');
     }
 
 	constructor(private http : Http)
@@ -27,14 +26,13 @@ export class SimpleComponentHttp
 
 	getStock() {
 
-	this.http.get("http://jsonplaceholder.typicode.com/posts/1").map((res: Response) => res.json())	.subscribe(
+	this.http.get("http://jsonplaceholder.typicode.com/posts/1").map((res: Response) => <Article>res.json()).subscribe(
 	data => {
-		console.log(data.id);
-		console.log(data.title);
-		console.log(data);
+
+		this.info = new Article(data.id, data.title, data.title);
 	},
 		err => console.log(err),
 		() => console.log('done!'));
-	};
+		};
 
 }
