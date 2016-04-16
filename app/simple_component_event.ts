@@ -1,16 +1,16 @@
 import {Http, Response} from 'angular2/http';
-import {Component, Input, Output} from 'angular2/core';
+import {Component, EventEmitter, Input, Output} from 'angular2/core';
 import {Article} from 'app/article';
 import 'rxjs/Rx'; import 'rxjs/Rx';	
 import {StockDetailComponent} from 'app/stockdetailcomponent';
 
 @Component({
     selector: 'my-simple-component-limitation-offset-is-there-one',
-    template: '<h1> Stock App </h1> <div> <li *ngFor="#item of info"> <div (click)="showStockDetail(item)"> {{ item.name }} </div> </li> <stock-detail [stock]="stockDetail"> </stock-detail></div>', 
+    template: '<h1> Stock App </h1> <div> <li *ngFor="#item of info"> <div (click)="showStockDetail(item)"> {{ item.name }} </div> </li> <stock-detail (changed)="childChangedEvent($event)" [stock]="stockDetail"> </stock-detail></div>', 
     directives: [StockDetailComponent]
 })
 
-export class SimpleComponentEvent
+export class SimpleComponentEvent	
 { 
    
     info: Article;
@@ -19,6 +19,11 @@ export class SimpleComponentEvent
     ngOnInit()
     {
 		this.getStock();
+    }
+
+    childChangedEvent(item: any)
+    {
+		console.log("we receive you loud and clear!!");
     }
 
 	constructor(private http : Http)
