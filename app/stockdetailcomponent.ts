@@ -3,7 +3,7 @@ import 'rxjs/Rx'; import 'rxjs/Rx';
 
 @Component({
     selector: 'stock-detail',
-    template: '<h1> stock detail info comes : {{ stock?.username }} </h1> <input type=button value=yes (click)="triggerIt()" />'
+    template: '<h1> stock detail info comes : {{ stock?.username }} </h1> <input type=button value="Roger that!" (click)="triggerIt()" />'
 })
 
 export class StockDetailComponent
